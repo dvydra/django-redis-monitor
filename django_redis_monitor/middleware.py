@@ -1,11 +1,12 @@
 from django.db.backends import BaseDatabaseWrapper
 from django.conf import settings
 from redis_monitor import get_instance
+from util import is_sampling_request
 import time, logging
 
 class RedisMonitorMiddleware(object):
     def process_request(self, request):
-        if self.should_track_request(request):
+        if self.should_track_request(request) and is_sampling_request():
             self.tracking = True
             self.start_time = time.time()
             self.rm = get_instance('requests')

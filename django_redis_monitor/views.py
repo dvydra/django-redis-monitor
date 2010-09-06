@@ -2,7 +2,8 @@ from django.shortcuts import render_to_response as render
 from django.http import HttpResponse
 from django.conf import settings
 from redis_monitor import get_instance
-
+from util import calculate_estimate
+ 
 def monitor(request):
     requests = get_instance('requests')
     sqlops = get_instance('sqlops')
@@ -29,8 +30,8 @@ def nagios(request):
     requests = get_instance('requests').get_totals()
     sqlops = get_instance('sqlops').get_totals()
     return render('django_redis_monitor/nagios.xml', {
-        'db_count': sqlops.get('hits', 0),
-        'db_total_ms': int(int(sqlops.get('weight', 0)) / 1000.0),
-        'request_count': requests.get('hits', 0),
-        'request_total_ms': int(int(requests.get('weight', 0)) / 1000.0),
+        'db_count': calculate_estimate(sqlops.get('hits', 0)),
+        'db_total_ms': calculate_estimate(int(int(sqlops.get('weight', 0)) / 1000.0)),
+        'request_count': calculate_estimate(requests.get('hits', 0)),
+        'request_total_ms': calculate_estimate(int(int(requests.get('weight', 0)) / 1000.0)),
     })

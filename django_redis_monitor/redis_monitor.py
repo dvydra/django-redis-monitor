@@ -1,5 +1,7 @@
 import datetime # we use utcnow to insulate against daylight savings errors
 import redis
+import settings
+from util import calculate_estimate
 
 class RedisMonitor(object):
     def __init__(self, prefix='', redis_obj=None, redis_host='localhost', 
@@ -64,8 +66,8 @@ class RedisMonitor(object):
             hash, slot = self._hash_and_slot(current)
             if hash not in preloaded_hashes:
                 preloaded_hashes[hash] = self.r.hgetall(hash)
-            hits = int(preloaded_hashes[hash].get(slot, 0))
-            weight = int(preloaded_hashes[hash].get(slot + 'w', 0))
+            hits = calculate_estimate(int(preloaded_hashes[hash].get(slot, 0)))
+            weight = calculate_estimate(int(preloaded_hashes[hash].get(slot + 'w', 0)))
             gathered.append((current, hits, weight))
             current += datetime.timedelta(seconds = 10)
         return gathered
