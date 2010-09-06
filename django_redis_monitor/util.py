@@ -1,8 +1,9 @@
 from django.conf import settings
+import random
 
 def is_sampling_request():
     sample_percentage = getattr(settings, 'REDIS_MONITOR_SAMPLE_PERCENTAGE', 100)
-    return sample_percentage <= randint(1, 100)
+    return sample_percentage <= random.randint(1, 100)
 
 def calculate_estimate(sample_value):
     sample_percentage = getattr(settings, 'REDIS_MONITOR_SAMPLE_PERCENTAGE', 100)
