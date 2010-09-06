@@ -106,3 +106,12 @@ If you want the monitoring view to only be visible to super users, do this:
         '/redis-monitor/nagios.xml',
         re.compile('^/static/'),
     )
+
+12. If you want to only track a representative sample of all requests, 
+    you can add an optional REDIS_MONITOR_SAMPLE_PERCENTAGE setting. 
+    This should be a number between 1 (sample 1 in 100 requests) and 
+    100 (sample all requests).
+    
+    REDIS_MONITOR_SAMPLE_PERCENTAGE = 5
+    
+    This will randomly sample 5% of requests.
