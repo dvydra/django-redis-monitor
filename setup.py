@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-redis-monitor',
-    version="1.0.0",
+    version="1.0.1",
     description='Request per second / SQLop per second monitoring for Django, using Redis for storage',
     author='Simon Willison',
     author_email='simon@simonwillison.net',
