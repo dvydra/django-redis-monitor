@@ -1,0 +1,2 @@
+recursive-include django_redis_monitor *.py *.html *.txt *.xml
+prune redis_monitor_demo
