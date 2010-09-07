@@ -6,11 +6,11 @@ class MonitoredCursorWrapper(object):
     def __init__(self, cursor, db):
         self.cursor = cursor
         self.db = db
-        self.rm = get_instance('sqlops')
     
     def execute(self, sql, params=()):
         if is_sampling_request():
             start = time.time()
+            self.rm = get_instance('sqlops')
             try:
                 return self.cursor.execute(sql, params)
             finally:
@@ -26,6 +26,7 @@ class MonitoredCursorWrapper(object):
     def executemany(self, sql, param_list):
         if is_sampling_request():
             start = time.time()
+            self.rm = get_instance('sqlops')
             try:
                 return self.cursor.executemany(sql, param_list)
             finally:
