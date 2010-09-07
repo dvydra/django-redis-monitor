@@ -1,7 +1,8 @@
 import datetime # we use utcnow to insulate against daylight savings errors
 import redis
-import settings
 from util import calculate_estimate
+from django.conf import settings
+from django.core import signals
 
 class RedisMonitor(object):
     def __init__(self, prefix='', redis_obj=None, redis_host='localhost', 
@@ -100,8 +101,6 @@ class RedisMonitorTotalsOnly(RedisMonitor):
         return self.r.hgetall(hash) or {}
 
 def get_instance(prefix):
-    from django.conf import settings
-    from django.core import signals
     host = getattr(settings, 'REDIS_MONITOR_HOST', 'localhost')
     port = getattr(settings, 'REDIS_MONITOR_PORT', 6379)
     db = getattr(settings, 'REDIS_MONITOR_DB', 0)
