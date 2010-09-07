@@ -1,2 +1,4 @@
-recursive-include django_redis_monitor *.py *.html *.txt *.xml
-prune redis_monitor_demo
+recursive-include *.py *.html *.txt *.xml
+include django_redis_monitor/postgresql_psycopg2_backend *.py
+include django_redis_monitor/mysql_backend *.py
+include django_redis_monitor/sqlite3_backend *.py

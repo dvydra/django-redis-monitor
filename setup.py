@@ -7,7 +7,7 @@ setup(
     author='Simon Willison',
     author_email='simon@simonwillison.net',
     url='http://github.com/dvydra/django-redis-monitor',
-    packages = ['django_redis_monitor'],
+    packages = ['django_redis_monitor','django_redis_monitor.postgresql_psycopg2_backend', 'django_redis_monitor.mysql_backend','django_redis_monitor.sqlite3_backend'],
     classifiers=[
         'Development Status :: 5 - Production',
         'Environment :: Web Environment',
