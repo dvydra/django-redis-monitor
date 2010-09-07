@@ -1,15 +1,9 @@
-import os
-from setuptools import setup, find_packages
-
-f = open(os.path.join(os.path.dirname(__file__), 'README'))
-readme = f.read()
-f.close()
+from setuptools import setup
 
 setup(
     name='django-redis-monitor',
     version="1.0.0",
     description='Request per second / SQLop per second monitoring for Django, using Redis for storage',
-    long_description=readme,
     author='Simon Willison',
     author_email='simon@simonwillison.net',
     url='http://github.com/dvydra/django-redis-monitor',
